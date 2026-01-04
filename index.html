@@ -57,18 +57,17 @@
             border-right: 1px solid rgba(255, 255, 255, 0.05);
             border-radius: 12px;
         }
-
-        .win-logo {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-bottom: 40px;
-            font-weight: 600;
+        .windows12{
+            left: 120px;
+            position: absolute;
+            bottom: 15px;
         }
-
         .logo-box img {
             height: 22px;
             width: 22px;
+            position: absolute;
+            bottom: 30px;
+            left: 80px;
         }
 
         .sidebar li { list-style: none; padding: 10px 0; color: rgba(255,255,255,0.3); font-size: 0.85rem; }
@@ -126,6 +125,48 @@
         .footer { margin-top: auto; display: flex; justify-content: flex-end; gap: 15px; }
         button { padding: 10px 35px; background: #0078d4; color: white; border: none; border-radius: 4px; cursor: pointer; }
         button:disabled { background: #444; color: #888; }
+        .setuplogo{
+            height: 40px;
+            width: 40px;
+            position: absolute;
+            top: 5px;
+            left: 10px;
+        }
+        .windowssetup{
+            position: absolute;
+            left: 55px;
+            top: -5px;
+        }
+        .top-bar{
+            height: 40px;
+            background-color: rgb(0, 0, 0);
+            position: fixed;
+            width: 850px;
+            border-top-left-radius: 12px;
+            border-top-right-radius: 12px;
+        }
+        .win-ctrl-btn:hover { background: rgba(0,0,0,0.06); }
+        .close-btn:hover { background: #e81123 !important; color: white; border-radius: 5px; text-align: center;}
+        .win-ctrl-btn{
+            position: absolute;
+            right: 5px;
+            gap: 5px;
+        }
+        .one{
+            position: absolute;
+            right: 75px;
+        }
+        .two{
+            position: absolute; 
+            right: 45px;
+        }
+        .three{
+            position: absolute;
+            right: 15px;
+        }
+        .one, .two, .three{
+            top: 10px;
+        }
     </style>
 </head>
 <body>
@@ -137,10 +178,19 @@
 
     <div id="setup-interface">
         <div class="glass-container">
+            <div class="top-bar">
+                <img src="R.png" alt="" class="setuplogo">
+                <p class="windowssetup">Windows Setup</p>
+                <div class="win-controls">
+                    <div class="win-ctrl- one" onclick="hideWin('win-browser')">🗕</div>
+                    <div class="win-ctrl-btn two" onclick="maxWin('win-browser')">▢</div>
+                    <div class="win-ctrl-btn close-btn three" onclick="closeWin('win-browser')">✕</div>
+                </div>
+            </div>
             <aside class="sidebar">
                 <div class="win-logo">
                     <div class="logo-box"><img src="logo.png" alt=""></div>
-                    Windows 12
+                    <p class="windows12">Windows 12</p>
                 </div>
                 <ul>
                     <li id="m1" class="active">Настройки</li>
@@ -214,6 +264,10 @@
 
     <script>
         // Переменная для хранения выбранной ОС (по умолчанию Home)
+        
+        function closeWin(id) { document.getElementById(id).style.display = 'none'; }
+        function maxWin(id) { document.getElementById(id).classList.toggle('maximized'); }
+        
         let selectedOSId = 'home';
 
         window.onload = function() {
@@ -266,8 +320,6 @@
                             window.location.href = 'OSeducation.html';
                         } else if (selectedOSId === 'enterprise') {
                             window.location.href = 'OSenterprise.html';
-                        } else {
-                            window.location.href = 'OS.html'; // На случай ошибки
                         }
                     }, 2000);
                 }
